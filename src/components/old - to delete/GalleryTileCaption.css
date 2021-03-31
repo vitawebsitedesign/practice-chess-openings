@@ -1,0 +1,12 @@
+.caption {
+    background: white;
+    bottom: 5px;
+    color: grey;
+    font-size: 0.74rem;
+    max-width: 90%;
+    right: 0;
+}
+.caption.active {
+    background: #007bff;
+    color: white;
+}

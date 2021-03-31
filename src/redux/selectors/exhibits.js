@@ -1,0 +1,1 @@
+export const getExhibit = (items, itemId) => items.find(i => i.id === itemId);
