@@ -1,0 +1,29 @@
+.Home--board {
+  position: relative;
+  width: 50%;
+}
+.Home--board--files--file:nth-child(odd) .Home--board--files--file--rank:nth-child(even) {
+  background: #eeeed2;
+}
+.Home--board--files--file:nth-child(odd) .Home--board--files--file--rank:nth-child(odd) {
+  background: #769656;
+}
+.Home--board--files--file:nth-child(even) .Home--board--files--file--rank:nth-child(odd) {
+  background: #eeeed2;
+}
+.Home--board--files--file:nth-child(even) .Home--board--files--file--rank:nth-child(even) {
+  background: #769656;
+}
+.Home--board--files--file {
+  width: 12.5%;
+}
+.Home--board--files--file--rank {
+  height: 0;
+  padding-bottom: 100%;
+}
+.Home--board--pieces--piece {
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 12.5%;
+}
