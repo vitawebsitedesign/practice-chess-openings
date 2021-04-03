@@ -1,0 +1,272 @@
+/*** rank A ***/
+.Home--board--pieces--piece[data-file="a"][data-rank="8"] {
+  left: calc(0 * 12.5%);
+  top: calc(0 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="a"][data-rank="7"] {
+  left: calc(0 * 12.5%);
+  top: calc(1 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="a"][data-rank="6"] {
+  left: calc(0 * 12.5%);
+  top: calc(2 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="a"][data-rank="5"] {
+  left: calc(0 * 12.5%);
+  top: calc(3 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="a"][data-rank="4"] {
+  left: calc(0 * 12.5%);
+  top: calc(4 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="a"][data-rank="3"] {
+  left: calc(0 * 12.5%);
+  top: calc(5 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="a"][data-rank="2"] {
+  left: calc(0 * 12.5%);
+  top: calc(6 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="a"][data-rank="1"] {
+  left: calc(0 * 12.5%);
+  top: calc(7 * 12.5%);
+}
+
+/*** rank B ***/
+.Home--board--pieces--piece[data-file="b"][data-rank="8"] {
+  left: calc(1 * 12.5%);
+  top: calc(0 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="b"][data-rank="7"] {
+  left: calc(1 * 12.5%);
+  top: calc(1 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="b"][data-rank="6"] {
+  left: calc(1 * 12.5%);
+  top: calc(2 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="b"][data-rank="5"] {
+  left: calc(1 * 12.5%);
+  top: calc(3 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="b"][data-rank="4"] {
+  left: calc(1 * 12.5%);
+  top: calc(4 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="b"][data-rank="3"] {
+  left: calc(1 * 12.5%);
+  top: calc(5 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="b"][data-rank="2"] {
+  left: calc(1 * 12.5%);
+  top: calc(6 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="b"][data-rank="1"] {
+  left: calc(1 * 12.5%);
+  top: calc(7 * 12.5%);
+}
+
+/*** rank C ***/
+.Home--board--pieces--piece[data-file="c"][data-rank="8"] {
+  left: calc(2 * 12.5%);
+  top: calc(0 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="c"][data-rank="7"] {
+  left: calc(2 * 12.5%);
+  top: calc(1 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="c"][data-rank="6"] {
+  left: calc(2 * 12.5%);
+  top: calc(2 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="c"][data-rank="5"] {
+  left: calc(2 * 12.5%);
+  top: calc(3 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="c"][data-rank="4"] {
+  left: calc(2 * 12.5%);
+  top: calc(4 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="c"][data-rank="3"] {
+  left: calc(2 * 12.5%);
+  top: calc(5 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="c"][data-rank="2"] {
+  left: calc(2 * 12.5%);
+  top: calc(6 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="c"][data-rank="1"] {
+  left: calc(2 * 12.5%);
+  top: calc(7 * 12.5%);
+}
+
+
+/*** rank D ***/
+.Home--board--pieces--piece[data-file="d"][data-rank="8"] {
+  left: calc(3 * 12.5%);
+  top: calc(0 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="d"][data-rank="7"] {
+  left: calc(3 * 12.5%);
+  top: calc(1 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="d"][data-rank="6"] {
+  left: calc(3 * 12.5%);
+  top: calc(2 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="d"][data-rank="5"] {
+  left: calc(3 * 12.5%);
+  top: calc(3 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="d"][data-rank="4"] {
+  left: calc(3 * 12.5%);
+  top: calc(4 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="d"][data-rank="3"] {
+  left: calc(3 * 12.5%);
+  top: calc(5 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="d"][data-rank="2"] {
+  left: calc(3 * 12.5%);
+  top: calc(6 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="d"][data-rank="1"] {
+  left: calc(3 * 12.5%);
+  top: calc(7 * 12.5%);
+}
+
+/*** rank E ***/
+.Home--board--pieces--piece[data-file="e"][data-rank="8"] {
+  left: calc(4 * 12.5%);
+  top: calc(0 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="e"][data-rank="7"] {
+  left: calc(4 * 12.5%);
+  top: calc(1 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="e"][data-rank="6"] {
+  left: calc(4 * 12.5%);
+  top: calc(2 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="e"][data-rank="5"] {
+  left: calc(4 * 12.5%);
+  top: calc(3 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="e"][data-rank="4"] {
+  left: calc(4 * 12.5%);
+  top: calc(4 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="e"][data-rank="3"] {
+  left: calc(4 * 12.5%);
+  top: calc(5 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="e"][data-rank="2"] {
+  left: calc(4 * 12.5%);
+  top: calc(6 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="e"][data-rank="1"] {
+  left: calc(4 * 12.5%);
+  top: calc(7 * 12.5%);
+}
+
+/*** rank F ***/
+.Home--board--pieces--piece[data-file="f"][data-rank="8"] {
+  left: calc(5 * 12.5%);
+  top: calc(0 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="f"][data-rank="7"] {
+  left: calc(5 * 12.5%);
+  top: calc(1 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="f"][data-rank="6"] {
+  left: calc(5 * 12.5%);
+  top: calc(2 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="f"][data-rank="5"] {
+  left: calc(5 * 12.5%);
+  top: calc(3 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="f"][data-rank="4"] {
+  left: calc(5 * 12.5%);
+  top: calc(4 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="f"][data-rank="3"] {
+  left: calc(5 * 12.5%);
+  top: calc(5 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="f"][data-rank="2"] {
+  left: calc(5 * 12.5%);
+  top: calc(6 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="f"][data-rank="1"] {
+  left: calc(5 * 12.5%);
+  top: calc(7 * 12.5%);
+}
+
+/*** rank G ***/
+.Home--board--pieces--piece[data-file="g"][data-rank="8"] {
+  left: calc(6 * 12.5%);
+  top: calc(0 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="g"][data-rank="7"] {
+  left: calc(6 * 12.5%);
+  top: calc(1 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="g"][data-rank="6"] {
+  left: calc(6 * 12.5%);
+  top: calc(2 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="g"][data-rank="5"] {
+  left: calc(6 * 12.5%);
+  top: calc(3 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="g"][data-rank="4"] {
+  left: calc(6 * 12.5%);
+  top: calc(4 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="g"][data-rank="3"] {
+  left: calc(6 * 12.5%);
+  top: calc(5 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="g"][data-rank="2"] {
+  left: calc(6 * 12.5%);
+  top: calc(6 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="g"][data-rank="1"] {
+  left: calc(6 * 12.5%);
+  top: calc(7 * 12.5%);
+}
+
+/*** rank H ***/
+.Home--board--pieces--piece[data-file="h"][data-rank="8"] {
+  left: calc(7 * 12.5%);
+  top: calc(0 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="h"][data-rank="7"] {
+  left: calc(7 * 12.5%);
+  top: calc(1 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="h"][data-rank="6"] {
+  left: calc(7 * 12.5%);
+  top: calc(2 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="h"][data-rank="5"] {
+  left: calc(7 * 12.5%);
+  top: calc(3 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="h"][data-rank="4"] {
+  left: calc(7 * 12.5%);
+  top: calc(4 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="h"][data-rank="3"] {
+  left: calc(7 * 12.5%);
+  top: calc(5 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="h"][data-rank="2"] {
+  left: calc(7 * 12.5%);
+  top: calc(6 * 12.5%);
+}
+.Home--board--pieces--piece[data-file="h"][data-rank="1"] {
+  left: calc(7 * 12.5%);
+  top: calc(7 * 12.5%);
+}
