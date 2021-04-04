@@ -25,3 +25,8 @@ export const removePiece = (id) => ({
     type: 'PIECE_REMOVE',
     id
 });
+
+export const resetBoard = (id) => ({
+    type: 'BOARD_RESET'
+});
+
