@@ -4,6 +4,7 @@ import './PieceCoordinates.css';
 import {selectPiece, movePiece, removePiece, resetBoard} from '../redux/actions/board';
 import {addMoves} from '../redux/actions/moves';
 import {setOpening} from '../redux/actions/ai';
+import openings from '../redux/reducers/data/ai-openings/ai-openings-list';
 import blackBishop from '../img/piece-black-bishop.png';
 import blackHorse from '../img/piece-black-horse.png';
 import blackKing from '../img/piece-black-king.png';
@@ -17,6 +18,20 @@ import whitePawn from '../img/piece-white-pawn.png';
 import whiteQueen from '../img/piece-white-queen.png';
 import whiteRook from '../img/piece-white-rook.png';
 import React from 'react';
+
+const pieceDisplayNames = {
+  'pawn': '',
+  'rook': 'r',
+  'knight': 'n',
+  'bishop': 'b',
+  'king': 'k',
+  'queen': 'q'
+};
+
+const getPieceDisplayName = id => {
+  const type = id.substr(0, id.indexOf('-'));
+  return pieceDisplayNames[type];
+};
 
 class Home extends React.Component {
   constructor(props) {
@@ -131,7 +146,7 @@ class Home extends React.Component {
         onClick={evt => this.tryMovePiece(props, file, rank, props.selectedPiece?.colour, props.selectedPiece?.pieceId)}
         id={`square-${file}${rank}`}
         className={className}>
-        <span className="Home--board--files--file--rank--square-coordinate">{file}{rank}</span>
+        <span className="Home--board--files--file--rank--square-coordinate text-center">{file}{rank}</span>
       </div>
     );
   };
@@ -158,14 +173,11 @@ class Home extends React.Component {
   };
 
   tryPlayAiMove = (props) => {
-    if (props.aiMoves && props.aiMoves.length) {
+    if (props.aiMoves && props.aiMoves.length > 1) {
+      props.aiMoves.shift();  // Skip white moves
       const mv = props.aiMoves.shift();
-      const lastAiMove = props.aiMoves.length === 0;
       if (mv) {
         const piece = props.pieces.find(p => p.id === mv.pieceId);
-
-        console.log(mv.pieceId);
-
         if (piece) {
           const colour = props.playerColour === 'white' ? 'black' : 'white';
           const file = piece.file;
@@ -174,12 +186,8 @@ class Home extends React.Component {
           const playerColour = colour;
           const isPlayerMove = false;
   
-          this.trySelectPiece(colour, file, rank, pieceId, playerColour, isPlayerMove);
-          this.tryMovePiece(props, mv.file, mv.rank, piece.colour, piece.id, isPlayerMove);
-  
-          if (lastAiMove) {
-            setTimeout(() => alert('opening finished'), 500);
-          }
+          setTimeout(() => this.trySelectPiece(colour, file, rank, pieceId, playerColour, isPlayerMove), 500);
+          setTimeout(() => this.tryMovePiece(props, mv.file, mv.rank, piece.colour, piece.id, isPlayerMove), 2000);
         }
       } 
     }
@@ -190,6 +198,25 @@ class Home extends React.Component {
 
     const openingId = evt.target.value;
     this.props.setOpening(openingId);
+  };
+
+  calculateScore = props => {
+    if (props.aiMovesPristine.length === 0)
+      return 0;
+
+    const numCorrectMoves = props.moves.filter((move, idx) => {
+      if (idx > props.aiMovesPristine.length - 1)
+        return true;
+
+      const correctMove = props.aiMovesPristine[idx];
+      return move.pieceId === correctMove.pieceId
+        && move.file === correctMove.file
+        && move.rank === correctMove.rank;
+    }).length;
+
+    const score = numCorrectMoves / props.aiMovesPristine.length;
+    const scoreRounded = (score * 100).toFixed(2);
+    return Math.min(100, scoreRounded);
   };
 
   render() {
@@ -207,50 +234,25 @@ class Home extends React.Component {
     }
   
     const pieceEles = this.getPieceElements(props.pieces);
-  
+    const openingOptions = openings.map(id => <option key={id} value={id}>{id}</option>);
+    const movesListItems = props.aiMoves.map((m, idx) => <li key={idx}>{getPieceDisplayName(m.pieceId)}{m.file}{m.rank}</li>)
+
+    let scoreClassName = '';
+    const score = props.moves.length === 0 ? '-' : `${this.calculateScore(props)}%`;
+    if (score == 0) {
+      scoreClassName = 'text-danger';
+    } else if (score == 100) {
+      scoreClassName = 'text-success';
+    }
+
     return (
       <div className="App container-fluid">
         <div className="row">
           <div className="col-12">
             <select onChange={this.trySetOpening} value="">
               <option value="">-</option>
-              <option value="alekhines-defense">alekhines-defense</option>
-              <option value="benko-gambit">benko-gambit</option>
-              <option value="benoni-defense-modern-variation">benoni-defense-modern-variation</option>
-              <option value="birds-opening">birds-opening</option>
-              <option value="bogo-indian-defense">bogo-indian-defense</option>
-              <option value="caro-kann-defense">caro-kann-defense</option>
-              <option value="catalan-opening">catalan-opening</option>
-              <option value="dutch-defense">dutch-defense</option>
-              <option value="english-opening">english-opening</option>
-              <option value="french-defense">french-defense</option>
-              <option value="grob-opening">grob-opening</option>
-              <option value="grunfeld-defense">grunfeld-defense</option>
-              <option value="italian-game">italian-game</option>
-              <option value="kings-fianchetto-opening">kings-fianchetto-opening</option>
-              <option value="kings-gambit">kings-gambit</option>
-              <option value="kings-indian-attack">kings-indian-attack</option>
-              <option value="kings-indian-defense">kings-indian-defense</option>
-              <option value="london-system">london-system</option>
-              <option value="nimzo-indian-defense">nimzo-indian-defense</option>
-              <option value="nimzowitsch-larsen-attack">nimzowitsch-larsen-attack</option>
-              <option value="polish-opening">polish-opening</option>
-              <option value="queens-gambit">queens-gambit</option>
-              <option value="queens-indian-defense">queens-indian-defense</option>
-              <option value="reti-opening">reti-opening</option>
-              <option value="ruy-lopez">ruy-lopez</option>
-              <option value="scotch-game">scotch-game</option>
-              <option value="sicilian-defense-closed">sicilian-defense-closed</option>
-              <option value="sicilian-defense">sicilian-defense</option>
-              <option value="slav-defense">slav-defense</option>
-              <option value="trompowsky-attack">trompowsky-attack</option>
-              <option value="vienna-game">vienna-game</option>
+              {openingOptions}
             </select>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            AI moves: {props.aiMoves.length}
           </div>
         </div>
         <div className="row">
@@ -265,6 +267,19 @@ class Home extends React.Component {
             </section>
           </div>
         </div>
+        <div className="row">
+          <div className="col-12">
+            <div className={scoreClassName}>
+              Progress: {score}
+            </div>
+          </div>
+          <div className="col-12">
+            Moves:
+            <ul>
+              {movesListItems}
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }
@@ -272,6 +287,8 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   aiMoves: state.ai.moves,
+  aiMovesPristine: state.ai.movesPristine,
+  moves: state.board.moves,
   pieces: state.board.pieces,
   playerColour: state.player.colour,
   selectedPiece: state.board.selectedPiece
