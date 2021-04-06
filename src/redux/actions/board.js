@@ -13,7 +13,7 @@ export const selectPiece = (selectedPiece) => {
 };
 
 export const movePiece = (pieceId, file, rank) => ({
-    type: 'PIECE_COORDINATE_SET',
+    type: 'MOVE_PIECE',
     move: {
         pieceId,
         file,
@@ -29,4 +29,3 @@ export const removePiece = (id) => ({
 export const resetBoard = (id) => ({
     type: 'BOARD_RESET'
 });
-

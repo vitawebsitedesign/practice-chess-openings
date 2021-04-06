@@ -1,4 +1,5 @@
 .Home--board {
+  border: 2px solid black;
   position: relative;
   width: 50%;
 }
@@ -26,14 +27,18 @@
   position: relative;
 }
 .Home--board--files--file--rank--square-coordinate {
-  cursor: none;
+  cursor: default;
+  font-size: 0.7em;
   font-weight: bold;
-  font-size: 0.7rem;
-  left: 5%;
   opacity: 0.4;
   position: absolute;
   text-transform: uppercase;
-  top: 0;
+  transform: translateY(-50%);
+  top: 50%;
+  width: 100%;
+}
+.Home--board--files--file--rank--square-coordinate::first-letter {
+  font-size: 1rem;
 }
 
 .Home--board--pieces--piece {

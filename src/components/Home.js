@@ -19,6 +19,20 @@ import whiteQueen from '../img/piece-white-queen.png';
 import whiteRook from '../img/piece-white-rook.png';
 import React from 'react';
 
+const pieceDisplayNames = {
+  'pawn': '',
+  'rook': 'r',
+  'knight': 'n',
+  'bishop': 'b',
+  'king': 'k',
+  'queen': 'q'
+};
+
+const getPieceDisplayName = id => {
+  const type = id.substr(0, id.indexOf('-'));
+  return pieceDisplayNames[type];
+};
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -132,7 +146,7 @@ class Home extends React.Component {
         onClick={evt => this.tryMovePiece(props, file, rank, props.selectedPiece?.colour, props.selectedPiece?.pieceId)}
         id={`square-${file}${rank}`}
         className={className}>
-        <span className="Home--board--files--file--rank--square-coordinate">{file}{rank}</span>
+        <span className="Home--board--files--file--rank--square-coordinate text-center">{file}{rank}</span>
       </div>
     );
   };
@@ -164,9 +178,6 @@ class Home extends React.Component {
       const mv = props.aiMoves.shift();
       if (mv) {
         const piece = props.pieces.find(p => p.id === mv.pieceId);
-
-        console.log(mv.pieceId);
-
         if (piece) {
           const colour = props.playerColour === 'white' ? 'black' : 'white';
           const file = piece.file;
@@ -175,8 +186,8 @@ class Home extends React.Component {
           const playerColour = colour;
           const isPlayerMove = false;
   
-          this.trySelectPiece(colour, file, rank, pieceId, playerColour, isPlayerMove);
-          this.tryMovePiece(props, mv.file, mv.rank, piece.colour, piece.id, isPlayerMove);
+          setTimeout(() => this.trySelectPiece(colour, file, rank, pieceId, playerColour, isPlayerMove), 500);
+          setTimeout(() => this.tryMovePiece(props, mv.file, mv.rank, piece.colour, piece.id, isPlayerMove), 2000);
         }
       } 
     }
@@ -187,6 +198,25 @@ class Home extends React.Component {
 
     const openingId = evt.target.value;
     this.props.setOpening(openingId);
+  };
+
+  calculateScore = props => {
+    if (props.aiMovesPristine.length === 0)
+      return 0;
+
+    const numCorrectMoves = props.moves.filter((move, idx) => {
+      if (idx > props.aiMovesPristine.length - 1)
+        return true;
+
+      const correctMove = props.aiMovesPristine[idx];
+      return move.pieceId === correctMove.pieceId
+        && move.file === correctMove.file
+        && move.rank === correctMove.rank;
+    }).length;
+
+    const score = numCorrectMoves / props.aiMovesPristine.length;
+    const scoreRounded = (score * 100).toFixed(2);
+    return Math.min(100, scoreRounded);
   };
 
   render() {
@@ -204,10 +234,16 @@ class Home extends React.Component {
     }
   
     const pieceEles = this.getPieceElements(props.pieces);
-  
     const openingOptions = openings.map(id => <option key={id} value={id}>{id}</option>);
+    const movesListItems = props.aiMoves.map((m, idx) => <li key={idx}>{getPieceDisplayName(m.pieceId)}{m.file}{m.rank}</li>)
 
-    const aiMovesListItems = props.aiMoves.map((m, idx) => <li key={idx}>{m.pieceId} &gt; {m.file}{m.rank}</li>)
+    let scoreClassName = '';
+    const score = props.moves.length === 0 ? '-' : `${this.calculateScore(props)}%`;
+    if (score == 0) {
+      scoreClassName = 'text-danger';
+    } else if (score == 100) {
+      scoreClassName = 'text-success';
+    }
 
     return (
       <div className="App container-fluid">
@@ -217,14 +253,6 @@ class Home extends React.Component {
               <option value="">-</option>
               {openingOptions}
             </select>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            AI moves:
-            <ul>
-              {aiMovesListItems}
-            </ul>
           </div>
         </div>
         <div className="row">
@@ -239,6 +267,19 @@ class Home extends React.Component {
             </section>
           </div>
         </div>
+        <div className="row">
+          <div className="col-12">
+            <div className={scoreClassName}>
+              Progress: {score}
+            </div>
+          </div>
+          <div className="col-12">
+            Moves:
+            <ul>
+              {movesListItems}
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }
@@ -246,6 +287,8 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   aiMoves: state.ai.moves,
+  aiMovesPristine: state.ai.movesPristine,
+  moves: state.board.moves,
   pieces: state.board.pieces,
   playerColour: state.player.colour,
   selectedPiece: state.board.selectedPiece

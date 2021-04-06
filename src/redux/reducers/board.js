@@ -2,7 +2,8 @@ import boardInitialPiecesState from './data/board-initial-pieces-state';
 
 const initialState = {
     selectedPiece: null,
-    pieces: boardInitialPiecesState
+    pieces: boardInitialPiecesState,
+    moves: []
 };
 
 const board = (state = initialState, action) => {
@@ -11,12 +12,23 @@ const board = (state = initialState, action) => {
             return {...state, pieces: boardInitialPiecesState};
         case 'SELECTED_PIECE_SET':
             return {...state, selectedPiece: action.selectedPiece};
-        case 'PIECE_COORDINATE_SET': {
+        case 'MOVE_PIECE': {
             const pieces = JSON.parse(JSON.stringify([...state.pieces]));
             const piece = pieces.find(p => p.id === action.move.pieceId);
+            const moves = JSON.parse(JSON.stringify(state.moves));
+            moves.push({
+                pieceId: action.move.pieceId,
+                file: action.move.file,
+                rank: action.move.rank
+            });
+
             piece.file = action.move.file;
             piece.rank = action.move.rank;
-            return {...state, pieces: pieces};
+            return {
+                ...state,
+                pieces: pieces,
+                moves: moves
+            };
         }
         case 'PIECE_REMOVE': {
             const pieces = JSON.parse(JSON.stringify([...state.pieces]));
