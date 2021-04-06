@@ -49,9 +49,9 @@ const state = [
         rank: 2
     },
     {
-        type: 'king',
+        type: 'queen',
         colour: 'white',
-        id: 'king-white-d1',
+        id: 'queen-white-d1',
         file: 'd',
         rank: 1
     },
@@ -63,9 +63,9 @@ const state = [
         rank: 2
     },
     {
-        type: 'queen',
+        type: 'king',
         colour: 'white',
-        id: 'queen-white-e1',
+        id: 'king-white-e1',
         file: 'e',
         rank: 1
     },
@@ -161,9 +161,9 @@ const state = [
         rank: 7
     },
     {
-        type: 'king',
+        type: 'queen',
         colour: 'black',
-        id: 'king-black-d8',
+        id: 'queen-black-d8',
         file: 'd',
         rank: 8
     },
@@ -175,9 +175,9 @@ const state = [
         rank: 7
     },
     {
-        type: 'queen',
+        type: 'king',
         colour: 'black',
-        id: 'queen-black-e8',
+        id: 'king-black-e8',
         file: 'e',
         rank: 8
     },
