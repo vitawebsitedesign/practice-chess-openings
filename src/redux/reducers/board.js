@@ -9,7 +9,7 @@ const initialState = {
 const board = (state = initialState, action) => {
     switch (action.type) {
         case 'BOARD_RESET':
-            return {...state, pieces: boardInitialPiecesState};
+            return JSON.parse(JSON.stringify(initialState));
         case 'SELECTED_PIECE_SET':
             return {...state, selectedPiece: action.selectedPiece};
         case 'MOVE_PIECE': {

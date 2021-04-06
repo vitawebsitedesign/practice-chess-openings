@@ -195,10 +195,12 @@ class Home extends React.Component {
   };
 
   trySetOpening = evt => {
-    this.props.resetBoard();
+    this.setOpening(this.props, evt.target.value);
+  };
 
-    const openingId = evt.target.value;
-    this.props.setOpening(openingId);
+  setOpening = (props, openingId) => {
+    props.resetBoard();
+    props.setOpening(openingId);
   };
 
   calculateScore = props => {
@@ -236,7 +238,7 @@ class Home extends React.Component {
   
     const pieceEles = this.getPieceElements(props.pieces);
     const openingOptions = openings.map(id => <option key={id} value={id}>{id}</option>);
-    const movesListItems = props.aiMoves.map((m, idx) => <li key={idx}>{getPieceDisplayName(m.pieceId)}{m.file}{m.rank}</li>)
+    const movesListItems = props.aiMovesPristine.map((m, idx) => <li key={idx}>{getPieceDisplayName(m.pieceId)}{m.file}{m.rank}</li>)
 
     let scoreClassName = '';
     const score = props.moves.length === 0
@@ -253,7 +255,7 @@ class Home extends React.Component {
       <div className="App container-fluid">
         <div className="row">
           <div className="col-12">
-            <select onChange={this.trySetOpening} value="">
+            <select onChange={this.trySetOpening} value={props.openingId}>
               <option value="">-</option>
               {openingOptions}
             </select>
@@ -276,6 +278,7 @@ class Home extends React.Component {
             <div className={scoreClassName}>
               Progress: {score}
             </div>
+            <button onClick={() => this.setOpening(props, props.openingId)}>reset</button>
           </div>
           <div className="col-12">
             Moves:
@@ -293,6 +296,7 @@ const mapStateToProps = state => ({
   aiMoves: state.ai.moves,
   aiMovesPristine: state.ai.movesPristine,
   moves: state.board.moves,
+  openingId: state.ai.openingId,
   pieces: state.board.pieces,
   playerColour: state.player.colour,
   selectedPiece: state.board.selectedPiece
