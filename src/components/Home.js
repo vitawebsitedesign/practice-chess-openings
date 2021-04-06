@@ -4,6 +4,7 @@ import './PieceCoordinates.css';
 import {selectPiece, movePiece, removePiece, resetBoard} from '../redux/actions/board';
 import {addMoves} from '../redux/actions/moves';
 import {setOpening} from '../redux/actions/ai';
+import openings from '../redux/reducers/data/ai-openings/ai-openings-list';
 import blackBishop from '../img/piece-black-bishop.png';
 import blackHorse from '../img/piece-black-horse.png';
 import blackKing from '../img/piece-black-king.png';
@@ -158,9 +159,9 @@ class Home extends React.Component {
   };
 
   tryPlayAiMove = (props) => {
-    if (props.aiMoves && props.aiMoves.length) {
+    if (props.aiMoves && props.aiMoves.length > 1) {
+      props.aiMoves.shift();  // Skip white moves
       const mv = props.aiMoves.shift();
-      const lastAiMove = props.aiMoves.length === 0;
       if (mv) {
         const piece = props.pieces.find(p => p.id === mv.pieceId);
 
@@ -176,10 +177,6 @@ class Home extends React.Component {
   
           this.trySelectPiece(colour, file, rank, pieceId, playerColour, isPlayerMove);
           this.tryMovePiece(props, mv.file, mv.rank, piece.colour, piece.id, isPlayerMove);
-  
-          if (lastAiMove) {
-            setTimeout(() => alert('opening finished'), 500);
-          }
         }
       } 
     }
@@ -208,49 +205,26 @@ class Home extends React.Component {
   
     const pieceEles = this.getPieceElements(props.pieces);
   
+    const openingOptions = openings.map(id => <option key={id} value={id}>{id}</option>);
+
+    const aiMovesListItems = props.aiMoves.map((m, idx) => <li key={idx}>{m.pieceId} &gt; {m.file}{m.rank}</li>)
+
     return (
       <div className="App container-fluid">
         <div className="row">
           <div className="col-12">
             <select onChange={this.trySetOpening} value="">
               <option value="">-</option>
-              <option value="alekhines-defense">alekhines-defense</option>
-              <option value="benko-gambit">benko-gambit</option>
-              <option value="benoni-defense-modern-variation">benoni-defense-modern-variation</option>
-              <option value="birds-opening">birds-opening</option>
-              <option value="bogo-indian-defense">bogo-indian-defense</option>
-              <option value="caro-kann-defense">caro-kann-defense</option>
-              <option value="catalan-opening">catalan-opening</option>
-              <option value="dutch-defense">dutch-defense</option>
-              <option value="english-opening">english-opening</option>
-              <option value="french-defense">french-defense</option>
-              <option value="grob-opening">grob-opening</option>
-              <option value="grunfeld-defense">grunfeld-defense</option>
-              <option value="italian-game">italian-game</option>
-              <option value="kings-fianchetto-opening">kings-fianchetto-opening</option>
-              <option value="kings-gambit">kings-gambit</option>
-              <option value="kings-indian-attack">kings-indian-attack</option>
-              <option value="kings-indian-defense">kings-indian-defense</option>
-              <option value="london-system">london-system</option>
-              <option value="nimzo-indian-defense">nimzo-indian-defense</option>
-              <option value="nimzowitsch-larsen-attack">nimzowitsch-larsen-attack</option>
-              <option value="polish-opening">polish-opening</option>
-              <option value="queens-gambit">queens-gambit</option>
-              <option value="queens-indian-defense">queens-indian-defense</option>
-              <option value="reti-opening">reti-opening</option>
-              <option value="ruy-lopez">ruy-lopez</option>
-              <option value="scotch-game">scotch-game</option>
-              <option value="sicilian-defense-closed">sicilian-defense-closed</option>
-              <option value="sicilian-defense">sicilian-defense</option>
-              <option value="slav-defense">slav-defense</option>
-              <option value="trompowsky-attack">trompowsky-attack</option>
-              <option value="vienna-game">vienna-game</option>
+              {openingOptions}
             </select>
           </div>
         </div>
         <div className="row">
           <div className="col-12">
-            AI moves: {props.aiMoves.length}
+            AI moves:
+            <ul>
+              {aiMovesListItems}
+            </ul>
           </div>
         </div>
         <div className="row">
