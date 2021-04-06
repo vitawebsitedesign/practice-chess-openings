@@ -66,7 +66,8 @@ const map = {
 
 const initialState = {
     movesPristine: [],
-    moves: []
+    moves: [],
+    openingId: ''
 };
 
 const getOpeningMoves = opening => {
@@ -84,7 +85,8 @@ const ai = (state = initialState, action) => {
             return {
                 ...state,
                 movesPristine: JSON.parse(JSON.stringify(movesBlueprint)),
-                moves: JSON.parse(JSON.stringify(movesBlueprint))
+                moves: JSON.parse(JSON.stringify(movesBlueprint)),
+                openingId: action.opening
             };
         }
         default:
