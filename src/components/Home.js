@@ -53,8 +53,9 @@ class Home extends React.Component {
 
   trySelectPiece = (colour, file, rank, pieceId, playerColour, isPlayerMove) => {
     const selectedPiece = this.props.selectedPiece;
+
     if (colour !== playerColour) {
-      this.tryMovePiece(this.props, file, rank, selectedPiece?.colour, selectedPiece?.id, isPlayerMove);
+      this.tryMovePiece(this.props, file, rank, selectedPiece?.colour, selectedPiece?.pieceId, isPlayerMove);
       return;
     }
 
@@ -238,10 +239,13 @@ class Home extends React.Component {
     const movesListItems = props.aiMoves.map((m, idx) => <li key={idx}>{getPieceDisplayName(m.pieceId)}{m.file}{m.rank}</li>)
 
     let scoreClassName = '';
-    const score = props.moves.length === 0 ? '-' : `${this.calculateScore(props)}%`;
-    if (score == 0) {
+    const score = props.moves.length === 0
+      ? '-'
+      : this.calculateScore(props);
+
+    if (score === 0) {
       scoreClassName = 'text-danger';
-    } else if (score == 100) {
+    } else if (score === 100) {
       scoreClassName = 'text-success';
     }
 
