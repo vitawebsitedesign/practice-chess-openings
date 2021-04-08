@@ -148,6 +148,7 @@ class Home extends React.Component {
         id={`square-${file}${rank}`}
         className={className}>
         <span className="Home--board--files--file--rank--square-coordinate text-center">{file}{rank}</span>
+        <div className="Home--board--files--file--rank--legal-move-marker"></div>
       </div>
     );
   };
