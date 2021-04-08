@@ -22,6 +22,8 @@
   width: 12.5%;
 }
 .Home--board--files--file--rank {
+  display: flex;
+  justify-content: center;
   height: 0;
   padding-bottom: 100%;
   position: relative;
@@ -40,6 +42,23 @@
 .Home--board--files--file--rank--square-coordinate::first-letter {
   font-size: 1rem;
 }
+.Home--board--files--file--rank--legal-move-marker {
+  background: rgba(0, 0, 0, .1);
+  border-radius: 100%;
+  height: 32%;
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  visibility: hidden;
+  width: 32%;
+}
+.Home--board--files--file--rank.legal-move .Home--board--files--file--rank--legal-move-marker {
+  visibility: visible;
+}
+.Home--board--files--file--rank.legal-move .Home--board--files--file--rank--square-coordinate {
+  opacity: 1;
+}
+
 
 .Home--board--pieces--piece {
   left: 0;
