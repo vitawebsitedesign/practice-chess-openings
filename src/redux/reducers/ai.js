@@ -67,7 +67,8 @@ const map = {
 const initialState = {
     movesPristine: [],
     moves: [],
-    openingId: ''
+    openingId: '',
+    openingIds: Object.keys(map)
 };
 
 const getOpeningMoves = opening => {
