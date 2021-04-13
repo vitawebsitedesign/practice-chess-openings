@@ -18,6 +18,7 @@ import whitePawn from '../img/piece-white-pawn.png';
 import whiteQueen from '../img/piece-white-queen.png';
 import whiteRook from '../img/piece-white-rook.png';
 import React from 'react';
+import { StrictMode } from 'react';
 
 const pieceDisplayNames = {
   'pawn': '',
@@ -199,6 +200,21 @@ class Home extends React.Component {
     this.setOpening(this.props, evt.target.value);
   };
 
+  trySetRandomOpening = () => {
+
+    const selectedOpenings = [...document.querySelectorAll('input[type="checkbox"][name="selected-openings"]:checked')];
+    const selectedOpeningIds = selectedOpenings.map(cbx => cbx.value);
+
+    let poolOpeningIds = this.props.openingIds;
+    if (selectedOpeningIds.length) {
+      poolOpeningIds = this.props.openingIds.filter(id => selectedOpeningIds.includes(id));
+    }
+    
+    const rand = Math.floor(Math.random() * 10 % poolOpeningIds.length);
+    const id = poolOpeningIds[rand];
+    this.setOpening(this.props, id);
+  };
+
   setOpening = (props, openingId) => {
     props.resetBoard();
     props.setOpening(openingId);
@@ -252,6 +268,184 @@ class Home extends React.Component {
       scoreClassName = 'text-success';
     }
 
+    const openingComplexities = {
+      'alekhines-defense': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'bronze'
+      },
+      'benko-gambit': {
+        area: 'A',
+        subcategory: '00',
+        complexity: 'gold'
+      },
+      'benoni-defense-modern-variation': {
+        area: 'A',
+        subcategory: '60',
+        complexity: 'diamond'
+      },
+      'birds-opening': {
+        area: 'A',
+        subcategory: '02',
+        complexity: 'bronze'
+      },
+      'bogo-indian-defense': {
+        area: 'E',
+        subcategory: '11',
+        complexity: 'gold'
+      },
+      'caro-kann-defense': {
+        area: 'B',
+        subcategory: '10',
+        complexity: 'bronze'
+      },
+      'catalan-opening': {
+        area: 'E',
+        subcategory: '00',
+        complexity: 'gold'
+      },
+      'dutch-defense': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'bronze'
+      },
+      'english-opening': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'bronze'
+      },
+      'french-defense': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'bronze'
+      },
+      'grob-opening': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'bronze'
+      },
+      'grunfeld-defense': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'gold'
+      },
+      'italian-game': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'silver'
+      },
+      'kings-fianchetto-opening': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'bronze'
+      },
+      'kings-gambit': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'easy'
+      },
+      'kings-indian-attack': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'silver'
+      },
+      'kings-indian-defense': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'silver'
+      },
+      'london-system': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'gold'
+      },
+      'nimzo-indian-defense': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'gold'
+      },
+      'nimzowitsch-larsen-attack': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'bronze'
+      },
+      'polish-opening': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'bronze'
+      },
+      'queens-gambit': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'bronze'
+      },
+      'queens-indian-defense': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'gold'
+      },
+      'reti-opening': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'bronze'
+      },
+      'ruy-lopez': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'gold'
+      },
+      'scotch-game': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'gold'
+      },
+      'sicilian-defense-closed': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'bronze'
+      },
+      'sicilian-defense': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'bronze'
+      },
+      'slav-defense': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'silver'
+      },
+      'trompowsky-attack': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'silver'
+      },
+      'vienna-game': {
+        area: 'B',
+        subcategory: '02',
+        complexity: 'silver'
+      }
+    };
+
+    const openingEles = props.openingIds.map(id => (
+      <tr key={id}>
+        <td>
+          <input type="checkbox" id={id} name="selected-openings" value={id} />
+        </td>
+        <td>
+          {id}
+        </td>
+        <td>
+          {openingComplexities[id].area}
+        </td>
+        <td>
+          {openingComplexities[id].subcategory}
+        </td>
+        <td>
+          {openingComplexities[id].complexity}
+        </td>
+      </tr>
+    ));
+
     return (
       <div className="App container-fluid">
         <div className="row">
@@ -280,6 +474,7 @@ class Home extends React.Component {
               Progress: {score}
             </div>
             <button onClick={() => this.setOpening(props, props.openingId)}>reset</button>
+            <button onClick={this.trySetRandomOpening}>next</button>
           </div>
           <div className="col-12">
             Moves:
@@ -287,6 +482,22 @@ class Home extends React.Component {
               {movesListItems}
             </ul>
           </div>
+          <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Opening</th>
+                    <th>Area</th>
+                    <th>Subcategory</th>
+                    <th>Complexity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {openingEles}
+                </tbody>
+              </table>
+            </div>
         </div>
       </div>
     );
@@ -298,6 +509,7 @@ const mapStateToProps = state => ({
   aiMovesPristine: state.ai.movesPristine,
   moves: state.board.moves,
   openingId: state.ai.openingId,
+  openingIds: state.ai.openingIds,
   pieces: state.board.pieces,
   playerColour: state.player.colour,
   selectedPiece: state.board.selectedPiece
